@@ -23,7 +23,7 @@ def generate(harmonics=n, rate=N):
 
 
 class Signal:
-    def __init__(self, gen, harmonics, rate):
+    def __init__(self, gen=generate, harmonics=n, rate=N):
         self.n = harmonics
         self.N = rate
         self.generate = gen
@@ -44,11 +44,11 @@ class Signal:
         res = 0
         expectation = self.get_m()
         for i in range(self.N):
-            res += ((xt[i] - expectation) ** 2)
+            res += (self.xt[i] - expectation) ** 2
         return res / (self.N - 1)
 
     def show(self):
-        mx = [M] * N
+        mx = [self.get_m()] * self.N
         plt.xlabel("t")
         plt.ylabel("x(t)")
         plt.plot(range(self.N), mx, 'r--', range(self.N), self.xt)
@@ -69,7 +69,6 @@ class Signal:
 
     def N_v_M(self):
         rates = [4 * 4 ** i for i in range(7)]
-        print(rates)
         expectations = []
 
         for i in rates:
@@ -82,9 +81,9 @@ class Signal:
         plt.show()
 
 
-signal = Signal(generate, n, N)
+signal = Signal()
 xt = signal.xt
 M = signal.get_m()
 D = signal.get_d()
 # print(M, D)
-signal.N_v_M()
+# signal.N_v_M()
