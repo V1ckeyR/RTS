@@ -1,4 +1,5 @@
 from lab11.main import Signal
+from time import time
 import matplotlib.pyplot as plt
 
 
@@ -22,10 +23,25 @@ def rxy(x, y, tau=0):
 # Графік залежності кореляції від тау
 s1 = Signal()
 s2 = Signal()
-taus = range(200)
-cors = [rx(s1, t) for t in taus]
-# cors = [rxy(s1, s2, t) for t in taus]
+s1.set_rate(10000)
+s2.set_rate(10000)
+taus = range(10000)
+
+start = time()
+auto_cors = [rx(s1, t) for t in taus]
+time_auto = round(time() - start, 3)
+
+start = time()
+cors = [rxy(s1, s2, t) for t in taus]
+time_cors = round(time() - start, 3)
+
+logical = '<' if time_auto < time_cors else '>'
+logical = '=' if time_auto == time_cors else logical
+
+print(f'Час побудови автокореляції: {time_auto}\nЧас побудови кореляції: {time_cors}')
+print(f'Час побудови автокореляції {logical} Час побудови кореляції')
+
 plt.xlabel("tau")
 plt.ylabel("correlation")
 plt.plot(taus, cors)
-plt.show()
+# plt.show()
