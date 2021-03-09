@@ -9,10 +9,20 @@ def w(pk, N):
     return complex(math.cos(fi), -math.sin(fi))
 
 
+table = {}
+
+
+def memoization(fun, arg1, arg2, arg3):
+    params = (arg1 * arg2, arg3)
+    if params not in table:
+        table[params] = fun(arg1 * arg2, arg3)
+    return table[params]
+
+
 def f(p, N):
     res = 0
     for k in range(N):
-        res += s.xt[k] * w(p * k, N)
+        res += s.xt[k] * memoization(w, p, k, N)
     return res
 
 
@@ -28,3 +38,6 @@ def dpf(N):
 s = Signal()
 dpf(s.N)
 plt.show()
+
+for key, v in table.items():
+    print(f'p*k = {key[0]} -> w = {v}')
