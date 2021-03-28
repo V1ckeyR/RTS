@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lab31</string>
+    <string name="enter_your_number">Enter your number:</string>
+    <string name="factorization">FACTORIZATION</string>
+</resources>
