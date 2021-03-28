@@ -26,7 +26,7 @@ def f(p, N):
     return res
 
 
-def dpf(N):
+def dft(N):
     sequence = range(N)
     spector = [f(freq, N) for freq in sequence]
     modules = list(map(lambda x: abs(x), spector))
@@ -36,8 +36,10 @@ def dpf(N):
 
 
 s = Signal()
-dpf(s.N)
-plt.show()
+# dft(s.N)
+# plt.show()
 
-for key, v in table.items():
-    print(f'p*k = {key[0]} -> w = {v}')
+# for key, v in table.items():
+#     print(f'p*k = {key[0]} -> w = {v}')
+
+# print(w(9, 4))
