@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">lab33</string>
+    <string name="ax1_bx2_cx3_dx4_y">ax1 + bx2 + cx3 + dx4 = y</string>
+    <string name="a">a</string>
+    <string name="b">b</string>
+    <string name="c">c</string>
+    <string name="d">d</string>
+    <string name="y">y</string>
+    <string name="calculate">Calculate</string>
+    <string name="best_result">Result:</string>
+    <string name="time">Time:</string>
+</resources>
