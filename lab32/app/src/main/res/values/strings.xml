@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">lab32</string>
+    <string name="learning_speed">Learning speed</string>
+    <string name="time_deadline">Time deadline</string>
+    <string name="max_iterations">Max iterations</string>
+    <string name="d_2_4">D(2,4)</string>
+    <string name="_3_3">С(3,3)</string>
+    <string name="_1_5">В(1,5)</string>
+    <string name="_0_6">А(0,6)</string>
+    <string name="p">P =</string>
+    <string name="_4">4</string>
+    <string name="w1">w1 =</string>
+    <string name="w2">w2 =</string>
+    <string name="time">Time:</string>
+    <string name="iterations">Iterations:</string>
+    <string name="train">train</string>
+</resources>
