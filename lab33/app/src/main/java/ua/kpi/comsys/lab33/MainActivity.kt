@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 val argD = if (d.text.isNullOrBlank()) 0 else d.text.toString().toInt()
                 val argY = if (y.text.isNullOrBlank()) 0 else y.text.toString().toInt()
 
-                val res: List<Int>?
+                val res: Pair<List<Int>, Int>?
                 val time = measureTimeMillis {
                     res = try {
                         Roulette(argA, argB, argC, argD, argY).run()
@@ -30,10 +30,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                val resultText = (res ?: "Not found :(").toString()
+                val resultText = (res?.first ?: "Not found :(").toString()
+                val iterationsText = (res?.second ?: "> 100").toString()
                 val timeMsText = "$time ms"
 
                 result.text = resultText
+                iterations.text = iterationsText
                 timeMs.text = timeMsText
             }
         }

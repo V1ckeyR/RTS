@@ -113,6 +113,23 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp" />
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/iterations"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/iterations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="16sp" />
+        </TableRow>
+
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"

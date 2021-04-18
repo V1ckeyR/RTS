@@ -2,6 +2,7 @@ package ua.kpi.comsys.lab33
 
 import kotlin.math.abs
 import kotlin.random.Random
+import kotlin.system.measureTimeMillis
 
 
 class Chromosome(private val range: IntRange,
@@ -18,11 +19,13 @@ class Roulette(a: Int, b: Int, c: Int, d: Int, private val y: Int) {
     private val coefficients = listOf(a, b, c, d)
     private val range = 0..y / coefficients.maxOf { it }
 
-    fun run(): List<Int>? {
-        var chromosomes = initGeneration()
+    fun run(populationSize: Int = 4): Pair<List<Int>, Int>? {
+        var chromosomes = initGeneration(populationSize)
         for (g in 1..100) {
-            chromosomes.forEach { if (it.fitness == 0) return it.data }
-            if (chromosomes.all { it.data == chromosomes.first().data }) chromosomes = initGeneration()
+            chromosomes.forEach { if (it.fitness == 0) return it.data to g }
+
+            if (chromosomes.all { it.data == chromosomes.first().data })
+                chromosomes = initGeneration(populationSize)
 
             chromosomes = selection(chromosomes).map(this::crossing).flatten()
             chromosomes.forEach(this::mutation)
@@ -30,7 +33,11 @@ class Roulette(a: Int, b: Int, c: Int, d: Int, private val y: Int) {
         return null
     }
 
-    private fun initGeneration() = List(4) { Chromosome(range, coefficients, y) }
+    private fun initGeneration(size: Int): List<Chromosome> {
+        var toCross = size
+        if (size % 2 == 1) toCross -= 1
+        return List(toCross) { Chromosome(range, coefficients, y) }
+    }
 
     private fun generator(ch: List<Chromosome>): Chromosome {
         val roulette = ch.map { 1.0 / it.fitness }.sum()
@@ -50,7 +57,7 @@ class Roulette(a: Int, b: Int, c: Int, d: Int, private val y: Int) {
         return listOf(ch1, ch2)
     }
 
-    private fun selection(ch: List<Chromosome>) = List(2) { pair(ch) }
+    private fun selection(ch: List<Chromosome>) = List(ch.size) { pair(ch) }
 
     private fun crossing(pair: List<Chromosome>): List<Chromosome> {
         val ch1 = pair[0].data
@@ -77,6 +84,19 @@ class Roulette(a: Int, b: Int, c: Int, d: Int, private val y: Int) {
                 newData[index] = mutation
                 ch.data = newData
             }
+        }
+    }
+}
+
+fun main() {
+    val r = Roulette(1, 2, 3, 5, 500)
+    for (e in 1..10) {
+        println("Experiment #$e")
+        println("S   I   T")
+        for (i in 4..10) {
+            val res: Pair<List<Int>, Int>?
+            val time = measureTimeMillis { res = r.run(i) }
+            println("$i   ${res?.second}   $time")
         }
     }
 }
